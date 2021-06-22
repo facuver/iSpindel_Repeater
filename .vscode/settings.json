@@ -1,0 +1,19 @@
+{
+    "python.languageServer": "Pylance",
+    "python.linting.enabled": true,
+    "python.analysis.autoSearchPath": true,
+    "python.jediEnabled": false,
+    "python.autoComplete.extraPaths": [
+        ".micropy\\micropython-esp32-1_15",
+        ".micropy\\iSpindel_Repeater"
+    ],
+    "python.autoComplete.typeshedPaths": [
+        ".micropy\\micropython-esp32-1_15",
+        ".micropy\\iSpindel_Repeater"
+    ],
+    "python.analysis.typeshedPaths": [
+        ".micropy\\micropython-esp32-1_15",
+        ".micropy\\iSpindel_Repeater"
+    ],
+    "python.linting.pylintEnabled": true
+}

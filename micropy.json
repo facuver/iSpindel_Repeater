@@ -1,0 +1,17 @@
+{
+    "name": "iSpindel_Repeater",
+    "stubs": {
+        "esp32-micropython-1.15.0": "1.3.9"
+    },
+    "dev-packages": {
+        "micropy-cli": "*"
+    },
+    "packages": {
+        "microdot": "*",
+        "microdot-asyncio": "*",
+        "utemplate": "*"
+    },
+    "config": {
+        "vscode": true
+    }
+}

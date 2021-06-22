@@ -1,0 +1,10 @@
+
+    <form action="/config" method="POST">
+    <input type="text" name="STA_essid" id="STA_essid" value={STA_essid}>
+    <input type="text" name="STA_password" id="STA_password" value={STA_password}>
+    <input type="text" name="ubidots_token" id = "ubidots_token" value={ubidots_token}>
+    <input type="text" name="update_interval" id="update_interval" value={update_interval}>
+    <input type="text" name="AP_password" id="AP_password" value={AP_password}>
+    <button hx-post="/config" hx-target="#container" >Submit</button>
+    
+    </form>
