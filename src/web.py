@@ -21,19 +21,15 @@ async def hello(request):
     responce = send_file("/www/header.html")
     return responce
 
+@app.get("/main_view")
+async def main_view(request):
+
+    return send_file("/www/main_view.html")
+
 @app.get("/config")
 async def config_get(request):
-    #with open("/www/config.html","r") as index:
-        #htmldoc = index.read().format(STA_essid = configs["STA_essid"] ,  STA_password =  configs["STA_password"] ,     ubidots_token =  configs["ubidots_token"] , update_interval = configs["update_interval"]  , AP_password = configs["AP_password"] )
-        #htmldoc = index.read().format(**configs)   
-    #return Response(body=htmldoc, headers={'Content-Type': 'text/html'})
-    
-    return Response(body=populate_template("/www/config.html" , configs) , headers={'Content-Type': 'text/html'})
 
-@app.get("/iSpindel_view")
-async def iSpindel_view(request):
-    name = list(iSpindels.keys())[0]
-    return Response(body=populate_template("/www/iSpindel_view.html" , iSpindels[name]) ,headers={'Content-Type': 'text/html'})
+    return Response(body=populate_template("/www/config.html" , configs) , headers={'Content-Type': 'text/html'})
 
 
 @app.post("/config")
@@ -46,7 +42,22 @@ async def config_post(request):
     configs["AP_password"] = request.form["AP_password"]
     print(update_configs(configs))
 
-    return send_file("/www/index.html")
+    return send_file("/www/main_view.html")
+
+
+
+@app.get("/iSpindel_view")
+async def iSpindel_view(request):
+    #name = list(iSpindels.keys())[0]
+    htmldoc = ""
+    for i in iSpindels:
+        htmldoc += populate_template("/www/iSpindel_view.html" , iSpindels[i])
+
+    return Response(body = htmldoc ,headers={'Content-Type': 'text/html'})
+
+    #return Response(body=populate_template("/www/iSpindel_view.html" , iSpindels[name]) ,headers={'Content-Type': 'text/html'})
+
+
 
 @app.route('/gravity' ,methods = "POST")
 async def gravity(request):
@@ -54,16 +65,10 @@ async def gravity(request):
     recive = ujson.loads(request.body.decode("utf-8"))    
     
     iSpindels[recive["name"]] = recive
-    
     iSpindels[recive["name"]].pop("temp_units")
-    #iSpindels[recive["name"]].pop("name")
         
     return
 
-@app.post("/clicked")
-def clicked(request):
-    htmldoc = "HOLA"
-    return Response(body=htmldoc, headers={'Content-Type': 'text/html'})
 
 @app.get("/www/htmx.min.js")
 def htmx(request):
