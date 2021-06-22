@@ -15,5 +15,9 @@
         ".micropy\\micropython-esp32-1_15",
         ".micropy\\iSpindel_Repeater"
     ],
-    "python.linting.pylintEnabled": true
+    "python.linting.pylintEnabled": true,
+    "python.analysis.extraPaths": [
+        ".micropy\\micropython-esp32-1_15",
+        ".micropy\\iSpindel_Repeater"
+    ]
 }

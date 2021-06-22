@@ -13,5 +13,15 @@ def update_configs(conf):
 
 
 
+
+
 configs = read_configs()
 
+
+time_interval = configs["update_interval"]
+token = configs["ubidots_token"]
+
+
+
+
+iSpindels = {'iSpindelAzul': {'ID': 14914712, 'interval': 10, 'RSSI': -49, 'temperature': 23.4375, 'battery': 3.94682, 'angle': 90.57912, 'gravity': 33.85515 , 'name' : 'iSpindelAzul'}}
