@@ -78,27 +78,6 @@ async def alive(request):
 async def htmx(request):
     return send_file("/www/htmx.min.js")
 
-@app.get("/modal")
-async def testModal(request):
-    htmldoc = """
-        <div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
-            <div class="modal-underlay" _="on click trigger closeModal"></div>
-            <div class="modal-content">
-                <h1>Modal Dialog</h1>
-                This is the modal content.
-                You can put anything here, like text, or a form, or an image.
-                <br>
-                <br>
-                <button _="on click trigger closeModal">Close</button>
-            </div>
-        </div>
-"""
-
-    return Response(body =  htmldoc , headers = {'Content-Type':'text/html'})
-
-@app.get('/testModal')
-async def testmodal(request):
-    return send_file("/www/testmodal.html")
 
 @app.route('/shutdown')
 async def shutdown(request):
