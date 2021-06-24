@@ -49,10 +49,11 @@ async def config_post(request):
 @app.get("/iSpindel_view")
 async def iSpindel_view(request):
     #name = list(iSpindels.keys())[0]
-    htmldoc = ""
+    htmldoc = '<div class="row m-3">'
     for i in iSpindels:
         htmldoc += populate_template("/www/iSpindel_view.html" , iSpindels[i])
 
+    htmldoc += "</div>"
     return Response(body = htmldoc ,headers={'Content-Type': 'text/html'})
 
     #return Response(body=populate_template("/www/iSpindel_view.html" , iSpindels[name]) ,headers={'Content-Type': 'text/html'})
@@ -69,7 +70,38 @@ async def gravity(request):
         
     return
 
+@app.get("/alive")
+async def alive(request):
+    return "yes"
 
 @app.get("/www/htmx.min.js")
-def htmx(request):
+async def htmx(request):
     return send_file("/www/htmx.min.js")
+
+@app.get("/modal")
+async def testModal(request):
+    htmldoc = """
+        <div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+            <div class="modal-underlay" _="on click trigger closeModal"></div>
+            <div class="modal-content">
+                <h1>Modal Dialog</h1>
+                This is the modal content.
+                You can put anything here, like text, or a form, or an image.
+                <br>
+                <br>
+                <button _="on click trigger closeModal">Close</button>
+            </div>
+        </div>
+"""
+
+    return Response(body =  htmldoc , headers = {'Content-Type':'text/html'})
+
+@app.get('/testModal')
+async def testmodal(request):
+    return send_file("/www/testmodal.html")
+
+@app.route('/shutdown')
+async def shutdown(request):
+    request.app.shutdown()
+    
+    return 'The server is shutting down...'

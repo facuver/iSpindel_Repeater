@@ -1,14 +1,22 @@
-
-
-
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{name}</h5>
-          <p class="card-text">{temperature}°C</p>
-          <p class="card-text">{angle}°</p>
-          <p class="card-text">{battery}V</p>  
-        </div>
-      </div>
-    </div>
-  
+                
+                <div class="col-sm-3">
+                    <div class="card shadow rounded ">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bolder">{name}</h5>
+                        <p class="card-text fw-bolder">
+                            <div class="row fw-bolder">
+                                <div class="col">
+                                    {temperature:.2f} °C 
+                                </div>
+                                <div class="col">
+                                    {angle:.2f} °
+                                </div>
+                                <div class="col">
+                                    {battery:.2f} V
+                                </div>
+                                
+                            </div>         
+                        </p>
+                    </div>
+                    </div>
+                </div>

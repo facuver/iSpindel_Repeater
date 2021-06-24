@@ -1,10 +1,37 @@
 
     <form action="/config" method="POST">
-    <input type="text" name="STA_essid" id="STA_essid" value={STA_essid}>
-    <input type="text" name="STA_password" id="STA_password" value={STA_password}>
-    <input type="text" name="ubidots_token" id = "ubidots_token" value={ubidots_token}>
-    <input type="text" name="update_interval" id="update_interval" value={update_interval}>
-    <input type="text" name="AP_password" id="AP_password" value={AP_password}>
-    <button hx-post="/config" hx-target="#container" >Submit</button>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">WIFI essid</span>
+                <input type="text" class="form-control" name="STA_essid" id="STA_essid" value={STA_essid}>
+            </div>
+
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">WIFI password</span>
+                <input type="text" class="form-control" name="STA_password" id="STA_password" value={STA_password}>
+            </div>
+
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Ubidots Token</span>
+                <input type="text" class="form-control" name="ubidots_token"  id = "ubidots_token" value={ubidots_token}>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Update Interval</span>
+                <input type="text" class="form-control" name="update_interval" id="update_interval" value={update_interval}>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">AP password</span>
+                <input type="text" class="form-control" name="AP_password" id="AP_password" value={AP_password}>
+            </div>
     
+
+
+        <button hx-post="/config" class="btn btn-secondary" hx-target="#container" >Submit</button>
+
+
+
     </form>
