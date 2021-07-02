@@ -1,8 +1,1 @@
-{
-    "AP_essid":"iSpindel_Repeater",
-    "AP_password":"test1234",
-    "ubidots_token":"BBFF-bicVhvmk3Gov3FjUTTdhXbFN0oOqRy",
-    "update_interval":20,
-    "STA_essid":"Julio",
-    "STA_password":"Misiones145"
- }
+{"AP_password": "test1234", "AP_essid": "iSpindel_Repeater", "update_interval": "10", "ubidots_token": "BBFF-bicVhvmk3Gov3FjUTTdhXbFN0oOqRy", "STA_essid": "Julio", "STA_password": "Misiones145"} 

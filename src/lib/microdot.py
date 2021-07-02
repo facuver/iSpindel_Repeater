@@ -286,7 +286,8 @@ class Response():
         'js': 'application/javascript',
         'json': 'application/json',
         'png': 'image/png',
-        'txt': 'text/plain',
+        'txt': 'text/plain'
+    
     }
     send_file_buffer_size = 1024
 
@@ -396,8 +397,9 @@ class Response():
             else:
                 content_type = 'application/octet-stream'
         f = open(filename, 'rb')
+        
         return cls(body=f, status_code=status_code,
-                   headers={'Content-Type': content_type})
+                   headers= {'Content-Type':content_type}  )
 
 
 class URLPattern():

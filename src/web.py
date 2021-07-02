@@ -1,7 +1,6 @@
 from microdot_asyncio import Microdot ,send_file, Response
 import ujson
-from cfg import configs, update_configs , iSpindels 
-
+from cfg import configs, update_configs , iSpindels ,ip
 
 
 app = Microdot()
@@ -12,14 +11,13 @@ def populate_template(filename,values):
             f = f.read()
         return f.format(**values)
     except:
-        return "nanoi"
+        return "ERROR POPULATING TEMPLATE"
 
 
 @app.route('/')
 async def hello(request):
    
-    responce = send_file("/www/header.html")
-    return responce
+    return send_file('/www/header.html')
 
 @app.get("/main_view")
 async def main_view(request):
@@ -56,8 +54,6 @@ async def iSpindel_view(request):
     htmldoc += "</div>"
     return Response(body = htmldoc ,headers={'Content-Type': 'text/html'})
 
-    #return Response(body=populate_template("/www/iSpindel_view.html" , iSpindels[name]) ,headers={'Content-Type': 'text/html'})
-
 
 
 @app.route('/gravity' ,methods = "POST")
@@ -74,13 +70,29 @@ async def gravity(request):
 async def alive(request):
     return "yes"
 
+@app.get("/get_ip")
+async def get_ip(request):
+    return str(ip)
+
 @app.get("/www/htmx.min.js")
 async def htmx(request):
     return send_file("/www/htmx.min.js")
+
+
+@app.get("/www/style.css")
+async def style(request):
+    return send_file("/www/style.css")
+
+# @app.get("/www/htmx.min.js")
+# async def htmx_gz(request):
+#     with open("/www/htmx.min.js.gz","rb") as f:
+#         f= f.read()
+
+#     return Response(body=f,status_code=200 , headers={'Content-Type': 'application/javascript' , 'Content-Encoding': 'gzip'})
+
 
 
 @app.route('/shutdown')
 async def shutdown(request):
     request.app.shutdown()
     
-    return 'The server is shutting down...'

@@ -6,8 +6,8 @@
 
 import utime as time 
 import network 
-
-from cfg import configs
+import cfg
+from cfg import configs 
 
 
 def do_connect(ssid, pwd, hard_reset=True):
@@ -50,6 +50,7 @@ ap.active(True)         # activate the interface
 
 sta_if = do_connect(configs["STA_essid"], configs["STA_password"])
 
-IP = sta_if.ifconfig()[0]
+cfg.ip = sta_if.ifconfig()[0]
 
-print(IP)
+
+

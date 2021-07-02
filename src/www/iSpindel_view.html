@@ -1,18 +1,18 @@
                 
                 <div class="col-sm-3">
-                    <div class="card shadow rounded ">
+                    <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-bolder">{name}</h5>
+                        <h5 class="card-title">{name}</h5>
                         <p class="card-text fw-bolder">
                             <div class="row fw-bolder">
                                 <div class="col">
-                                    {temperature:.2f} °C 
+                                    {temperature:.1f} °C 
                                 </div>
                                 <div class="col">
-                                    {angle:.2f} °
+                                    {angle:.1f} °
                                 </div>
                                 <div class="col">
-                                    {battery:.2f} V
+                                    {battery:.1f} V
                                 </div>
                                 
                             </div>         
@@ -20,3 +20,36 @@
                     </div>
                     </div>
                 </div>
+
+        
+
+
+<style>
+    
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2);
+    background-color: aquamarine;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-family: 'Avenir Next', 'Lato', sans-serif;
+    font-weight: 300;
+    
+    width: 20%;
+    display: flex;
+  }
+.card-title{
+    font-size: large;
+    font-weight: 400;
+}
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 4px 16px;
+  }
+</style>

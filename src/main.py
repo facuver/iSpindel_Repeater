@@ -26,6 +26,8 @@ async def update_data():
                 print(req.text)
         
 
+print(ip)
+
 asyncio.create_task(main_loop())
 asyncio.create_task(update_data())
 app.run(port = 80,debug = True)
