@@ -1,9 +1,11 @@
 
 import uasyncio as asyncio
 
+
 import urequests as requests
 from web import app
 from cfg import *
+from oled import Screen
 
 
 
@@ -11,7 +13,16 @@ from cfg import *
 async def main_loop():
     while True:
         print("Hello")
-        await asyncio.sleep(100)
+        
+        await asyncio.sleep(10)
+
+
+async def update_screen():
+    while True:
+        for i in iSpindels:
+            screen.update(iSpindels[i])
+            #print(i)
+            await asyncio.sleep(5)
 
 
 async def update_data():
@@ -26,10 +37,20 @@ async def update_data():
                 print(req.text)
         
 
+async def gb_col():
+    while True:
+
+        gc.collect()
+        gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+        print(gc.mem_free())
+        await asyncio.sleep(10)
+
 print(ip)
 
-asyncio.create_task(main_loop())
-asyncio.create_task(update_data())
+main_task = asyncio.create_task(main_loop())
+screen_task = asyncio.create_task(update_screen())
+update_task = asyncio.create_task(update_data())
+asyncio.create_task(gb_col())
 app.run(port = 80,debug = True)
 
 

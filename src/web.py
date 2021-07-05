@@ -47,7 +47,7 @@ async def config_post(request):
 @app.get("/iSpindel_view")
 async def iSpindel_view(request):
     #name = list(iSpindels.keys())[0]
-    htmldoc = '<div class="row m-3">'
+    htmldoc = '<div class="">'
     for i in iSpindels:
         htmldoc += populate_template("/www/iSpindel_view.html" , iSpindels[i])
 

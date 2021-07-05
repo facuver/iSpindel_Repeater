@@ -8,6 +8,9 @@ import utime as time
 import network 
 import cfg
 from cfg import configs 
+from oled import Screen
+
+from machine import I2C,Pin
 
 
 def do_connect(ssid, pwd, hard_reset=True):
@@ -41,6 +44,10 @@ def do_connect(ssid, pwd, hard_reset=True):
 
 print(configs)
 
+i2c = I2C(0,sda=Pin(19),scl=Pin(18))
+
+screen = Screen(i2c)
+
 
 ap = network.WLAN(network.AP_IF) # create access-point interface
 ap.config(essid=configs["AP_essid"], authmode = 4 , password = configs["AP_password"]) # set the ESSID of the access point
@@ -48,9 +55,11 @@ ap.config(essid=configs["AP_essid"], authmode = 4 , password = configs["AP_passw
 ap.config(max_clients=10) # set how many clients can connect to the network
 ap.active(True)         # activate the interface
 
+
+screen.print_msg("Connecting to: \n{}".format(configs["STA_essid"]))
 sta_if = do_connect(configs["STA_essid"], configs["STA_password"])
+screen.print_msg("Connected!!")
 
 cfg.ip = sta_if.ifconfig()[0]
-
 
 
