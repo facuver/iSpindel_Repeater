@@ -1,7 +1,7 @@
 from microdot_asyncio import Microdot ,send_file, Response
 import ujson
 from cfg import configs, update_configs , iSpindels ,ip
-
+import wifi
 
 app = Microdot()
 
@@ -10,7 +10,7 @@ def populate_template(filename,values):
         with open(filename,"r") as f:
             f = f.read()
         return f.format(**values)
-    except:
+    except Exception:
         return "ERROR POPULATING TEMPLATE"
 
 
@@ -32,14 +32,17 @@ async def config_get(request):
 
 @app.post("/config")
 async def config_post(request):
-
+    old_sta = configs["STA_essid"]
     configs["STA_essid"] = request.form["STA_essid"]
     configs["STA_password"] = request.form["STA_password"]
     configs["ubidots_token"] = request.form["ubidots_token"]
     configs["update_interval"] = request.form["update_interval"]
     configs["AP_password"] = request.form["AP_password"]
     print(update_configs(configs))
-
+    if old_sta != configs["STA_essid"]:
+        from machine import reset
+        reset()
+       
     return send_file("/www/main_view.html")
 
 
@@ -48,7 +51,9 @@ async def config_post(request):
 async def iSpindel_view(request):
     #name = list(iSpindels.keys())[0]
     htmldoc = '<div class="">'
+
     for i in iSpindels:
+
         htmldoc += populate_template("/www/iSpindel_view.html" , iSpindels[i])
 
     htmldoc += "</div>"
@@ -56,7 +61,7 @@ async def iSpindel_view(request):
 
 
 
-@app.route('/gravity' ,methods = "POST")
+@app.post('/gravity' )
 async def gravity(request):
     global iSpindels
     recive = ujson.loads(request.body.decode("utf-8"))    

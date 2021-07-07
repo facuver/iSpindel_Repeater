@@ -1,4 +1,5 @@
 from ssd1306 import SSD1306_I2C
+from machine import I2C,Pin
 from cfg import iSpindels 
 import cfg
 
@@ -9,6 +10,7 @@ class Screen():
         self.oled_width = width
         self.oled_height = height
         self.oled = SSD1306_I2C(self.oled_width, self.oled_height, i2c)   
+        self.oled.contrast(0)
 
     def update(self,iSpindel):
 
@@ -33,5 +35,7 @@ class Screen():
         self.oled.show()
 
 
+i2c = I2C(0,sda=Pin(19),scl=Pin(18))
 
+screen = Screen(i2c)
 

@@ -5,9 +5,11 @@ import uasyncio as asyncio
 import urequests as requests
 from web import app
 from cfg import *
-from oled import Screen
+import gc
 
+from usys import exit
 
+from oled import screen
 
 
 async def main_loop():
@@ -19,15 +21,19 @@ async def main_loop():
 
 async def update_screen():
     while True:
-        for i in iSpindels:
-            screen.update(iSpindels[i])
-            #print(i)
-            await asyncio.sleep(5)
-
+        if len(iSpindels):
+            for i in iSpindels:
+                screen.update(iSpindels[i])
+                #print(i)
+                await asyncio.sleep(5)
+        else:
+            screen.print_msg("No iSpindels \n{}".format(ip))
+            
+        await asyncio.sleep(0)
 
 async def update_data():
     while True:
-        await asyncio.sleep(int(time_interval))
+        await asyncio.sleep(int(configs["update_interval"]))
         if len(iSpindels) != 0:
             print("Sendind Datas")
             for iSpindel in iSpindels:
